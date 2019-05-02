@@ -14,6 +14,7 @@ from dateutil.relativedelta import relativedelta
 import numpy as np
 import math
 import time
+from matplotlib import pyplot
 #%%
 account_sid = "AC7ca38f83e6fec4679c7ed1ff8fa2e036"
 # Your Auth Token from twilio.com/console
