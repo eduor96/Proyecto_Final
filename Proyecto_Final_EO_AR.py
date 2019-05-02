@@ -73,3 +73,29 @@ while pd.to_datetime(F2)<fechas[-1]:
     try:F2=ag_car(str(fechas[n]))
     except IndexError:
         break
+# =============================================================================
+# Data Frame 1: Precios
+# =============================================================================
+df1_precios = pd.DataFrame(lista)
+df1_precios = df1_precios[['TimeStamp', 'Open', 'High', 'Low', 'Close']]
+df1_precios['TimeStamp'] = pd.to_datetime(df1_precios['TimeStamp'])
+#%%
+# =============================================================================
+# Data Frame 2: Operaciones
+# =============================================================================
+n=len(df1_precios)
+data=np.empty((n,8))
+df2_operaciones=pd.DataFrame(data,columns=['Fecha','Folio','Operacion',
+                             'Unidades','Margen','Comentario','Precio_Apertura',
+                             'Precio_Cierre']).replace(0,"-")
+df2_operaciones['Fecha']=df1_precios.iloc[:,0]
+# =============================================================================
+# Data Frame 3: Cuenta
+# =============================================================================
+data=np.empty((n,6))
+df3_cuenta=pd.DataFrame(data,columns=['Fecha','Capital','Flotante',
+                             'Balance','Rendimiento','Comentario']).replace(0,"-")
+df3_cuenta['Fecha']=df1_precios.iloc[:,0]
+# =============================================================================
+# Inicializacion de parametros
+# =============================================================================
