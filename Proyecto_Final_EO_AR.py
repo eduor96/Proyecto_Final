@@ -50,3 +50,26 @@ def rsi_fun(prices,ind,n):
     losses=np.array(losses)
     rsi=100-(100/(1+((gains.sum()/14)/(losses.sum()/14))))
     return rsi
+#%%
+# =============================================================================
+# Ciclo para descargar precios de oanda
+# =============================================================================
+while pd.to_datetime(F2)<fechas[-1]:
+    params = {"granularity": A1_OA_Gn, "price": "M", "dailyAlignment": A1_OA_Da,
+              "alignmentTimezone": A1_OA_Ta, "from": F1, "to": F2}
+    A1_Req1 = instruments.InstrumentsCandles(instrument=A1_OA_In, params=params)
+    A1_Hist = api.request(A1_Req1)
+    
+    for i in range(len(A1_Hist['candles'])-1):
+
+            lista.append({'TimeStamp': A1_Hist['candles'][i]['time'],
+                          'Open': A1_Hist['candles'][i]['mid']['o'],
+                          'High': A1_Hist['candles'][i]['mid']['h'],
+                          'Low': A1_Hist['candles'][i]['mid']['l'],
+                          'Close': A1_Hist['candles'][i]['mid']['c']})
+            
+    F1=ag_car(str(fechas[n+1]))
+    n=n+5000
+    try:F2=ag_car(str(fechas[n]))
+    except IndexError:
+        break
