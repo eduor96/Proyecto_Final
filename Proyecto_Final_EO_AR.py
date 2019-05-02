@@ -4,7 +4,7 @@ Created on Mon Apr 29 11:35:53 2019
 
 @author: eduor
 """
-
+from twilio.rest import Client
 import numpy as np
 from pyswarm import pso
 import pandas as pd
@@ -15,6 +15,12 @@ import numpy as np
 import math
 import time
 #%%
+account_sid = "AC7ca38f83e6fec4679c7ed1ff8fa2e036"
+# Your Auth Token from twilio.com/console
+auth_token  = "dc8dc79a5e89417c4e3319ff0551c265"
+
+client =Client(account_sid, auth_token)
+
 # =============================================================================
 # Definimos funciones a utilizar
 # =============================================================================
