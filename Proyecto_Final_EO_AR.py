@@ -167,6 +167,7 @@ def main_function(x):
             #Cambios en Data Frame 3: Cuenta
             cap=cap-monto
             df3_cuenta.iloc[i,5]="Se abrió operación: venta"
+            plt.axvline(x=df3_cuenta.iloc[i,0],color="r")
             texto=str(df3_cuenta.iloc[i,0])+" Se abrió operación: venta"
             sms(texto)
             precio_operacion=open_price
@@ -189,6 +190,7 @@ def main_function(x):
             cap=cap-monto
             df3_cuenta.iloc[i,5]="Se abrió operación: compra"
             texto=str(df3_cuenta.iloc[i,0])+" Se abrió operación: compra"
+            plt.axvline(x=df3_cuenta.iloc[i,0],color="b")
             sms(texto)
             precio_operacion=open_price
             #Cambios generales por operacion
