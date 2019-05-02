@@ -166,6 +166,8 @@ def main_function(x):
             #Cambios en Data Frame 3: Cuenta
             cap=cap-monto
             df3_cuenta.iloc[i,5]="Se abrió operación: venta"
+            texto=str(df3_cuenta.iloc[i,0])+" Se abrió operación: venta"
+            sms(texto)
             precio_operacion=open_price
             #Cambios generales por operacion
             ult_folio="V_"+str(folio_v)
@@ -185,6 +187,8 @@ def main_function(x):
             #Cambios en Data Frame 3: Cuenta
             cap=cap-monto
             df3_cuenta.iloc[i,5]="Se abrió operación: compra"
+            texto=str(df3_cuenta.iloc[i,0])+" Se abrió operación: compra"
+            sms(texto)
             precio_operacion=open_price
             #Cambios generales por operacion
             ult_folio="C_"+str(folio_c)
@@ -203,7 +207,8 @@ def main_function(x):
                 df3_cuenta.iloc[i,3]=df3_cuenta.iloc[i,1]
                 df3_cuenta.iloc[i,4]=df3_cuenta.iloc[i,3]/capital_i-1
                 df3_cuenta.iloc[i,5]="Se cerró operación: Con pérdida/ganancia: " + str(pr_lo)
-                
+                texto=str(df3_cuenta.iloc[i,0])+"Se cerró operación: Con pérdida/ganancia: " + str(pr_lo)
+                sms(texto)
                 df2_operaciones.iloc[i,1]=ult_folio
                 if pr_lo<=stop_loss: #Si se cumple el stop loss
                     df2_operaciones.iloc[i,5]="Se ejecutó Stop Loss: "+str(pr_lo)
