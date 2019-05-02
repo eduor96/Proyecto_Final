@@ -51,6 +51,33 @@ def rsi_fun(prices,ind,n):
     rsi=100-(100/(1+((gains.sum()/14)/(losses.sum()/14))))
     return rsi
 #%%
+start_date = datetime(2016, 4, 1)
+end_date = datetime(2019, 4, 1)
+fechas = date_range(start_date, end_date, 5, 'minutes')#Creamos vector de fechas con intervalo de 5 minutos
+
+A1_OA_Da = 17                     # Day Align
+A1_OA_Ta = "America/Mexico_City"  # Time Align
+
+A1_OA_Ai = "101-004-2221697-001"  # Id de cuenta
+A1_OA_At = "practice"             # Tipo de cuenta
+
+A1_OA_In = "USD_MXN"              # Instrumento
+A1_OA_Gn = "M5"                   # Granularidad de velas
+
+A1_OA_Ak = "a1a2738e43e01183e07cbb8dec8e2ca4-771e2b55a25bd1f6cb73b42ca4b1f432"
+
+
+F1=ag_car(str(fechas[0])) #Fecha 1 inicial
+F2=ag_car(str(fechas[5000])) #Fecha 2 inicial
+
+# =============================================================================
+# Inicializar API de Oanda
+# =============================================================================
+api = API(access_token=A1_OA_Ak)
+#
+
+lista = [] #Inicializamos lista 
+n=5000
 # =============================================================================
 # Ciclo para descargar precios de oanda
 # =============================================================================
