@@ -24,7 +24,11 @@ client =Client(account_sid, auth_token)
 # =============================================================================
 # Definimos funciones a utilizar
 # =============================================================================
-
+def sms(texto):
+    message = client.messages.create(
+        to="+523310116171", 
+        from_="+12024101431",
+        body=texto)
 def date_range(start_date, end_date, increment, period):
     #Funcion que crea vector de fechas con incremento especifico
     result = []
