@@ -236,3 +236,15 @@ def main_function(x):
     x=df1_precios.iloc[0:i-1,0]
     plt.plot(x,y)
     return rendimiento_final
+    #%% Proceso de optimización mediante modulo PSO de librería pyswarm.
+permiso=raw_input()
+
+if permiso==True:
+    low_var=[70,5,-100,10,14] #Definimos los valores mínimos de nuestros parámetros
+    up_var=[95,30,-10,100,56] #Definimos los valores máximos de nuestros parámetros
+
+    xopt, fopt = pso(main_function, low_var, up_var, ieqcons=[], f_ieqcons=None, args=(), kwargs={},
+        swarmsize=1000, omega=0.5, phip=0.5, phig=0.5, maxiter=100, minstep=.5,
+        minfunc=1e-8, debug=True)
+else:
+    print("Acceso Denegado")
