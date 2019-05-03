@@ -125,14 +125,14 @@ n=len(df1_precios)
 data=np.empty((n,8))
 df2_operaciones=pd.DataFrame(data,columns=['Fecha','Folio','Operacion',
                              'Unidades','Margen','Comentario','Precio_Apertura',
-                             'Precio_Cierre']).replace(0,"-")
+                             'Precio_Cierre']).replace(0,0)
 df2_operaciones['Fecha']=df1_precios.iloc[:,0]
 # =============================================================================
 # Data Frame 3: Cuenta
 # =============================================================================
 data=np.empty((n,6))
 df3_cuenta=pd.DataFrame(data,columns=['Fecha','Capital','Flotante',
-                             'Balance','Rendimiento','Comentario']).replace(0,"-")
+                             'Balance','Rendimiento','Comentario']).replace(0,0)
 df3_cuenta['Fecha']=df1_precios.iloc[:,0]
 # =============================================================================
 # Inicializacion de parametros
@@ -232,5 +232,7 @@ def main_function(x):
             df3_cuenta.iloc[i,4]=df3_cuenta.iloc[i,3]/capital_i-1
         print(i)
     rendimiento_final=df3_cuenta.iloc[i-1,4]
-    
+    y=df1_precios["Close"][0:i-1].astype(float)
+    x=df1_precios.iloc[0:i-1,0]
+    plt.plot(x,y)
     return rendimiento_final
