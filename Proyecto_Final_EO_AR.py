@@ -117,6 +117,7 @@ while pd.to_datetime(F2)<fechas[-1]:
 df1_precios = pd.DataFrame(lista)
 df1_precios = df1_precios[['TimeStamp', 'Open', 'High', 'Low', 'Close']]
 df1_precios['TimeStamp'] = pd.to_datetime(df1_precios['TimeStamp'])
+df1_precios.to_csv('precios.csv')
 #%%
 # =============================================================================
 # Data Frame 2: Operaciones
