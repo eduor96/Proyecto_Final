@@ -237,6 +237,7 @@ def main_function(x):
     x=df1_precios.iloc[0:i-1,0]
     plt.plot(x,y)
     return rendimiento_final
+#%% Tarda mucho
     #%% Proceso de optimización mediante modulo PSO de librería pyswarm.
 permiso=raw_input()
 
@@ -249,3 +250,37 @@ if permiso==True:
         minfunc=1e-8, debug=True)
 else:
     print("Acceso Denegado")
+#%% 2.1 Grafico Precio vs Operaciones
+x=[95,30,-10,80,14]
+rend_final=main_function(x) #Corremos la funcion con los parámetros óptimos
+#%% 2.2 Gráfica de evolución de capital
+
+i=1000
+x=df1_precios.iloc[0:i,0]
+y=df3_cuenta["Capital"][0:i].astype(float)
+plt.plot(x,y)
+
+#%% 2.3 Gráfica del Drawdown de la cuenta
+
+i=1000
+x=df1_precios.iloc[0:i,0]
+y=df3_cuenta["Balance"][0:i].astype(float)
+plt.plot(x,y)
+
+#%%3.1 Mediadas de Atribución al desempeño (MAT básicas)
+
+#%%3.3 Mediadas de Atribución (Trading)
+def create_drawdowns(equity_curve):
+    hwm = [0]
+    eq_idx = equity_curve.index
+    drawdown = pd.Series(index = eq_idx)
+    for t in range(1, len(eq_idx)):
+        cur_hwm = max(hwm[t-1], equity_curve[t])
+        hwm.append(cur_hwm)
+        drawdown[t]= hwm[t] - equity_curve[t]
+    return print('El drawdown máximo es',drawdown.max(),
+                 'El drawdown minimo es',drawdown.min(),
+                 'El drawdown mediana es',drawdown.median())
+
+#%% Drawdown maximo, mínimo y mediana
+create_drawdowns(df3_cuenta["Balance"])
